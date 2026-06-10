@@ -64,7 +64,7 @@ html,body{
 .card{
   position:absolute;
   /* bottom anchor — like a held hand of cards */
-  bottom:0;
+  top:50%;
   /* width drives everything */
   width:clamp(75px, 11.5vw, 118px);
   aspect-ratio:9/16;
@@ -74,7 +74,7 @@ html,body{
   text-decoration:none;
   display:block;
   /* CRITICAL: rotate from bottom-center, matching video */
-  transform-origin:50% 100%;
+  transform-origin:50% 50%;
   box-shadow:3px 6px 24px rgba(0,0,0,0.22),0 2px 6px rgba(0,0,0,0.1);
   opacity:0;
   will-change:transform,opacity;
@@ -195,7 +195,7 @@ html,body{
         card.style.transition = 'none';
       }
 
-      card.style.transform = `rotate(${ANGLES[i]}deg)`;
+      card.style.transform = `translateY(-50%) rotate(${ANGLES[i]}deg)`;
       card.style.opacity   = '1';
     });
   }
@@ -211,7 +211,7 @@ html,body{
       card.style.transition = 'none';
       card.style.left       = cx + 'px';
       card.style.zIndex     = i;
-      card.style.transform  = 'rotate(-8deg) scale(0.96)';
+      card.style.transform  = 'translateY(-50%) rotate(-8deg) scale(0.96)';
       card.style.opacity    = '0';
     });
 
@@ -252,7 +252,7 @@ html,body{
 
       // Lift hovered card: reduce angle, push up
       card.style.transition = 'transform 0.28s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.28s ease, filter 0.22s ease';
-      card.style.transform  = `rotate(${ANGLES[i] * 0.15}deg) translateY(-28px) scale(1.06)`;
+      card.style.transform  = `translateY(calc(-50% - 28px)) rotate(${ANGLES[i] * 0.15}deg) scale(1.06)`;
     });
 
     card.addEventListener('mouseleave', () => {
@@ -260,7 +260,7 @@ html,body{
       stage.classList.remove('has-hover');
       // Restore fan position
       card.style.transition = 'transform 0.32s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.28s ease, filter 0.22s ease';
-      card.style.transform  = `rotate(${ANGLES[i]}deg)`;
+      card.style.transform  = `translateY(-50%) rotate(${ANGLES[i]}deg)`;
 
       leaveTimer = setTimeout(() => {
         overlay.classList.remove('active');
@@ -273,7 +273,7 @@ html,body{
       e.preventDefault();
       const href = card.href;
       card.style.transition = 'transform 0.11s ease';
-      card.style.transform  = `rotate(${ANGLES[i] * 0.15}deg) translateY(-12px) scale(0.91)`;
+      card.style.transform  = `translateY(calc(-50% - 12px)) rotate(${ANGLES[i] * 0.15}deg) scale(0.91)`;
       setTimeout(() => window.open(href, '_blank'), 160);
     });
   });
